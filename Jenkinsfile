@@ -5,13 +5,13 @@ pipeline {
 	   steps {
                 echo 'compiling..'
 		git url: 'https://github.com/Tiru456/samplejavaapp.git'
-		sh script: '/usr/share/apache-maven/mvn compile'
+		sh script: '/usr/share/apache-maven/bin/mvn compile'
            }
         }
         stage('codereview-pmd') {
 	   steps {
                 echo 'codereview..'
-		sh script: '/usr/share/apache-maven/mvn -P metrics pmd:pmd'
+		sh script: '/usr/share/apache-maven/bin/mvn -P metrics pmd:pmd'
            }
 	   post {
                success {
@@ -22,7 +22,7 @@ pipeline {
         stage('unit-test') {
 	   steps {
                 echo 'unittest..'
-	        sh script: '/usr/share/apache-maven/mvn test'
+	        sh script: '/usr/share/apache-maven/bin/mvn test'
                  }
 	   post {
                success {
@@ -33,7 +33,7 @@ pipeline {
         stage('codecoverate') {
 	   steps {
                 echo 'codecoverage..'
-		sh script: '/usr/share/apache-maven/mvn cobertura:cobertura -Dcobertura.report.format=xml'
+		sh script: '/usr/share/apache-maven/bin/mvn cobertura:cobertura -Dcobertura.report.format=xml'
            }
 	   post {
                success {
@@ -44,7 +44,7 @@ pipeline {
         stage('package') {
 	   steps {
                 echo 'package..'
-		sh script: '/usr/share/apache-maven/mvn package'	
+		sh script: '/usr/share/apache-maven/bin/mvn package'	
            }		
         }
     }
